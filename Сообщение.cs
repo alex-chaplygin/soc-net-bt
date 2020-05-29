@@ -8,43 +8,43 @@ namespace СоцСеть
 {
     class Сообщение
     {
-        private Пользователь User;
-        private string Text;
-        private List<Image> Images = new List<Image>();
+        private Пользователь пользователь;
+        private string текст;
+        private List<Image> изображения = new List<Image>();
 
         public Сообщение(Пользователь п)
         {
-            User = п;
-            Text = "";
+            пользователь = п;
+            текст = "";
         }
         public Сообщение(Пользователь п, string с)
         {
-            User = п;
-            Text = с;
+            пользователь = п;
+            текст = с;
         }
         public Пользователь ПолучитьПользователя()
         {
-            return User;
+            return пользователь;
         }
-        public void ЗадатьТекст(string text)
+        public void ЗадатьТекст(string т)
         {
-            Text = text;
+            текст = т;
         }
         public string ПолучитьТекст()
         {
-            return Text;
+            return текст;
         }
-        public void ДобавитьИзображение(Image img)
+        public void ДобавитьИзображение(Image и)
         {
-            Images.Add(img);
+            изображения.Add(и);
         }
-        public void УдалитьИзображение(int num)
+        public void УдалитьИзображение(int номер)
         {
-            Images.RemoveAt(num);
+            изображения.RemoveAt(номер);
         }
         public List<Image> ПолучитьИзображения()
         {
-            return Images;
+            return изображения;
         }
     }
 }
