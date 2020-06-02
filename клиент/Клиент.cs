@@ -15,12 +15,15 @@ namespace СоцСеть {
 	    string pid = r.Next().ToString();
 	    while (true) {
 		string сообщ = Console.ReadLine();
+		СоздатьБлокировку(путь + "/" + pid + ".запрос");
 		StreamWriter sw = new StreamWriter(путь + "/" + pid + ".запрос");
 		sw.WriteLine(сообщ);
 		sw.Close();
+		ОсвободитьБлокировку(путь + "/" + pid + ".запрос");
 		StreamReader sr = null;
 		while (sr == null)
 		    try {
+			ЖдатьБлокировку(путь + "/" + pid + ".запрос.ответ");
 			sr = new StreamReader(путь + "/" + pid + ".запрос.ответ");
 		    } catch (FileNotFoundException e) {
 		    }
@@ -30,5 +33,29 @@ namespace СоцСеть {
 		File.Delete(путь + "/" + pid + ".запрос.ответ");
 	    }
 	}
+
+	static void ЖдатьБлокировку(string файл)
+	{
+	    while (true) {
+		try {
+		    StreamReader sr = new StreamReader(файл + ".блок");
+		    sr.Close();
+		} catch (FileNotFoundException e) {
+		    return;
+		}
+	    }
+	}
+
+	static void СоздатьБлокировку(string файл)
+	{
+	    StreamWriter sw = new StreamWriter(файл + ".блок");
+	    sw.WriteLine();
+	    sw.Close();
+	}
+
+	static void ОсвободитьБлокировку(string файл)
+	{
+	    File.Delete(файл + ".блок");
+	}	
     }
 }
