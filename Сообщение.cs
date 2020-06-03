@@ -11,12 +11,14 @@ namespace СоцСеть
         private Пользователь пользователь;
         private string текст;
         private List<Image> изображения;
+	private List<string> комментарии;
 
         public Сообщение(Пользователь п)
         {
             пользователь = п;
             текст = "";
 	    изображения = new List<Image>();
+	    комментарии = new List<string>();
         }
 	
         public Сообщение(Пользователь п, string с)
@@ -54,6 +56,16 @@ namespace СоцСеть
         public List<Image> ПолучитьИзображения()
         {
             return изображения;
+        }
+
+	public void ДобавитьКомментарий(string text)
+        {
+            комментарии.Add(text);
+        }
+	
+        public List<string> ПолучитьКомментарии()
+        {
+            return комментарии;
         }
     }
 }
