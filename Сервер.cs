@@ -5,6 +5,8 @@ using System.Collections.Generic;
 namespace СоцСеть {
     class Сервер {
 	static СоциальнаяСеть соцСеть;
+	static Dictionary<int, Пользователь> активныеПользователи;
+	static Random номера;
 	
 	public static void Main(string[] args)
 	{
@@ -14,6 +16,8 @@ namespace СоцСеть {
 	    }
 	    string путь = args[0];
 	    соцСеть = new СоциальнаяСеть();
+	    активныеПользователи = new Dictionary<int, Пользователь>();
+	    номера = new Random();
 	    соцСеть.Регистрация("user", "pass");
 	    соцСеть.Регистрация("user2", "pass2");
 	    while (true) {
@@ -44,7 +48,7 @@ namespace СоцСеть {
 		    StreamReader sr = new StreamReader(файл + ".блок");
 		    sr.Close();
 		} catch (FileNotFoundException e) {
-			Console.WriteLine(e.Message);
+		//	Console.WriteLine(e.Message);
 		    return;
 		}
 	    }
@@ -70,19 +74,59 @@ namespace СоцСеть {
 	    try {
 		if (команда[0] == "Авторизация")
 		    ответ = Авторизация(команда[1], команда[2]);
+		else if (команда[0] == "Выход")
+		    ответ = Выход(команда[1]);
+		else if (команда[0] == "Сообщение")
+		    ответ = Сообщение(команда[1], команда[2], String.Join(" ", команда, 3, команда.Length - 3));
 		else
 		    ответ = "Неизвестная команда";
 	    } catch (IndexOutOfRangeException e) {
 		ответ = "Неправильная команда " + e.Message;
 	    }
+	    Console.WriteLine(ответ);
 	    return ответ;
 	}
 
 	public static string Авторизация(string имя, string пароль)
 	{
-	    Пользователь п = соцСеть.Авторизация(имя, пароль);
-	    if (п == null) return "Неверное имя пользователя или пароль";
-	    else return "Успешно";
+	    int номер = НайтиПользователя(имя, пароль);
+	    if (номер == -1) {
+		Пользователь п = соцСеть.Авторизация(имя, пароль);
+		if (п == null) return "Неверное имя пользователя или пароль";
+		else {
+		    номер = ПолучитьНомер();
+		    активныеПользователи.Add(номер, п);
+		}
+	    }
+	    return номер.ToString();
+	}
+
+	public static string Выход(string номер)
+	{
+	    активныеПользователи.Remove(Convert.ToInt32(номер));
+	    return "";
+	}
+
+	public static string Сообщение(string номер, string кому, string текст)
+	{
+	    Пользователь п = активныеПользователи[Convert.ToInt32(номер)];
+	    if (п == null) return "Не авторизован";
+	    return текст;
+	}
+
+	static int ПолучитьНомер()
+	{
+	    return номера.Next() % 1000;
+	}
+
+	static int НайтиПользователя(string имя, string пароль)
+	{
+	    foreach (int номер in активныеПользователи.Keys) {
+		Пользователь п = активныеПользователи[номер];
+		if (п.ПолучитьИмя() == имя && п.ПолучитьПароль() == пароль)
+		    return номер;
+	    }
+	    return -1;
 	}
     }
 }
