@@ -14,8 +14,8 @@ namespace СоцСеть {
 	    }
 	    string путь = args[0];
 	    соцСеть = new СоциальнаяСеть();
-	    Пользователь п1 = соцСеть.Регистрация("user", "pass");
-	    Пользователь п2 = соцСеть.Регистрация("user2", "pass2");
+	    соцСеть.Регистрация("user", "pass");
+	    соцСеть.Регистрация("user2", "pass2");
 	    while (true) {
 		string[] файлы = Directory.GetFiles(путь, "*.запрос");
 		foreach (string файл in файлы) {
@@ -31,6 +31,7 @@ namespace СоцСеть {
 			sw.Close();
 			ОсвободитьБлокировку(файл + ".ответ");
 		    } catch (FileNotFoundException e) {
+			Console.WriteLine(e.Message);
 		    }
 		}
 	    }
@@ -43,6 +44,7 @@ namespace СоцСеть {
 		    StreamReader sr = new StreamReader(файл + ".блок");
 		    sr.Close();
 		} catch (FileNotFoundException e) {
+			Console.WriteLine(e.Message);
 		    return;
 		}
 	    }
@@ -71,7 +73,7 @@ namespace СоцСеть {
 		else
 		    ответ = "Неизвестная команда";
 	    } catch (IndexOutOfRangeException e) {
-		ответ = "Неправильная команда";
+		ответ = "Неправильная команда " + e.Message;
 	    }
 	    return ответ;
 	}
