@@ -34,11 +34,12 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="../Сервер.cs" />
-    <None Include="../СоциальнаяСеть.cs" />
-    <None Include="../Пользователь.cs" />
-    <None Include="../Сообщение.cs" />
-    <None Include="../Чат.cs" />
+    <Compile Include="../Сервер.cs" />
+    <Compile Include="../СоциальнаяСеть.cs" />
+    <Compile Include="../Пользователь.cs" />
+    <Compile Include="../Сообщение.cs" />
+    <Compile Include="../Чат.cs" />
+    <Compile Include="../Стена.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
