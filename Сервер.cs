@@ -82,7 +82,7 @@ namespace СоцСеть {
 		    ответ = Сообщение(команда[1], команда[2], String.Join(" ", команда, 3, команда.Length - 3));
 		else
 		    ответ = "Неизвестная команда";
-	    } catch (IndexOutOfRangeException e) {
+	    } catch (Exception e) {
 		ответ = "Неправильная команда " + e.Message;
 	    }
 	    Console.WriteLine(ответ);
