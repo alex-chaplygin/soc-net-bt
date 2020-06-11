@@ -27,7 +27,11 @@ namespace СоцСеть {
 			sr = new StreamReader(путь + "/" + pid + ".запрос.ответ");
 		    } catch (FileNotFoundException e) {
 		    }
-		Console.WriteLine(sr.ReadLine());
+		string сообщение = "";
+		string s;
+		while ((s = sr.ReadLine()) != null)
+		    сообщение += s;
+		Console.WriteLine(сообщение);
 		sr.Close();
 		File.Delete(путь + "/" + pid + ".запрос");
 		File.Delete(путь + "/" + pid + ".запрос.ответ");
