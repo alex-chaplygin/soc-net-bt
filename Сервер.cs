@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace СоцСеть {
     class Сервер {
@@ -36,31 +37,40 @@ namespace СоцСеть {
 	    п.Опубликовать("9------------");
 	    п.Опубликовать("10------------");
 	    п.Опубликовать("11------------");
-	    while (true)
-	    try {
-		int port = Convert.ToInt32(args[0]);
-		listener = new TcpListener(IPAddress.Loopback, port);
-		listener.Start();
+	    int port = Convert.ToInt32(args[0]);
+	    listener = new TcpListener(IPAddress.Loopback, port);
+	    listener.Start();
 
-		while (true)
-		{
-		    TcpClient client = listener.AcceptTcpClient();
-		    NetworkStream stream = client.GetStream();
-		    StreamWriter writer = new StreamWriter(stream, Encoding.UTF8) { AutoFlush = true };
-		    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-		
-		    string inputLine = "";
-		    inputLine = reader.ReadLine();
-		    writer.WriteLine(Обработать(inputLine));
-		    writer.Close();
-		    reader.Close();
-		    client.Close();
-		}
+	    while (true)
+	    {
+		TcpClient client = listener.AcceptTcpClient();
+		Thread t = new Thread(ОбработкаЗапросаКлиента);
+		t.Start(client);
+	    }	    
+	}
+
+	static void ОбработкаЗапросаКлиента(Object obj)
+	{
+	    TcpClient client = null;
+	    StreamWriter writer = null;
+	    StreamReader reader = null;
+	    try {
+		client = (TcpClient)obj;
+		NetworkStream stream = client.GetStream();
+		writer = new StreamWriter(stream, Encoding.UTF8) { AutoFlush = true };
+		reader = new StreamReader(stream, Encoding.UTF8);
+		string inputLine = "";
+		inputLine = reader.ReadLine();
+		writer.WriteLine(Обработать(inputLine));
+		writer.Close();
+		reader.Close();
+		client.Close();
 	    } catch (Exception e) {
-		listener.Stop();
+	        writer.Close();
+		reader.Close();
+		client.Close();
 		Console.WriteLine(e.Message);
 	    }
-	    
 	}
 	
 	static string Обработать(string сообщение)
