@@ -43,22 +43,24 @@ namespace СоцСеть {
 	    else return null;
 	}
 
-	public void НовыйЧат(string имя1, string имя2)
+	public Чат НовыйЧат(string имя1, string имя2)
 	{
 	    Пользователь п1 = НайтиПользователя(имя1);
 	    Пользователь п2 = НайтиПользователя(имя2);
 	    Чат ч;
 	    if (п1 != null && п2 != null) {
-		if (п1 == п2) return;
+		if (п1 == п2) return null;
 		foreach (Чат ч2 in чаты)
 		    if (ч2.ПолучитьПользователя1() == п1 && ч2.ПолучитьПользователя2() == п2)
-			return;
+			return ч2;
 		ч = new Чат(п1, п2);
 		чаты.Add(ч);
 		п1.ПолучитьЧаты().Add(ч);
 		п2.ПолучитьЧаты().Add(ч);
+		return ч;
 	    } else
 		System.Console.WriteLine("Не найдены пользователи " + имя1 + " " + имя2);
+	    return null;
 	}
     }  
 }
