@@ -1,20 +1,23 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 
 namespace СоцСеть {
     class Сервер {
 	static СоциальнаяСеть соцСеть;
 	static Dictionary<int, Пользователь> активныеПользователи;
 	static Random номера;
-	
+
 	public static void Main(string[] args)
 	{
+	    TcpListener listener = null;
 	    if (args.Length < 1) {
-		Console.WriteLine("Сервер <путь>");
+		Console.WriteLine("Сервер <порт>");
 		return;
 	    }
-	    string путь = args[0];
 	    соцСеть = new СоциальнаяСеть();
 	    активныеПользователи = new Dictionary<int, Пользователь>();
 	    номера = new Random();
@@ -33,52 +36,33 @@ namespace СоцСеть {
 	    п.Опубликовать("9------------");
 	    п.Опубликовать("10------------");
 	    п.Опубликовать("11------------");
-	    while (true) {
-		string[] файлы = Directory.GetFiles(путь, "*.запрос");
-		foreach (string файл in файлы) {
-		    try {
-			ЖдатьБлокировку(файл);
-			StreamReader sr = new StreamReader(файл);
-			string сообщение = sr.ReadLine();
-			Console.WriteLine(файл + ":" + сообщение);
-			sr.Close();
-			СоздатьБлокировку(файл + ".ответ");
-			StreamWriter sw = new StreamWriter(файл + ".ответ");
-			sw.WriteLine(Обработать(сообщение));
-			sw.Close();
-			ОсвободитьБлокировку(файл + ".ответ");
-		    } catch (FileNotFoundException e) {
-			Console.WriteLine(e.Message);
-		    }
+	    while (true)
+	    try {
+		int port = Convert.ToInt32(args[0]);
+		listener = new TcpListener(IPAddress.Loopback, port);
+		listener.Start();
+
+		while (true)
+		{
+		    TcpClient client = listener.AcceptTcpClient();
+		    NetworkStream stream = client.GetStream();
+		    StreamWriter writer = new StreamWriter(stream, Encoding.UTF8) { AutoFlush = true };
+		    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+		
+		    string inputLine = "";
+		    inputLine = reader.ReadLine();
+		    writer.WriteLine(Обработать(inputLine));
+		    writer.Close();
+		    reader.Close();
+		    client.Close();
 		}
+	    } catch (Exception e) {
+		listener.Stop();
+		Console.WriteLine(e.Message);
 	    }
+	    
 	}
-
-	static void ЖдатьБлокировку(string файл)
-	{
-	    while (true) {
-		try {
-		    StreamReader sr = new StreamReader(файл + ".блок");
-		    sr.Close();
-		} catch (FileNotFoundException e) {
-		//	Console.WriteLine(e.Message);
-		    return;
-		}
-	    }
-	}
-
-	static void СоздатьБлокировку(string файл)
-	{
-	    StreamWriter sw = new StreamWriter(файл + ".блок");
-	    sw.WriteLine();
-	    sw.Close();
-	}
-
-	static void ОсвободитьБлокировку(string файл)
-	{
-	    File.Delete(файл + ".блок");
-	}
-
+	
 	static string Обработать(string сообщение)
 	{
 	    string ответ = "";
@@ -164,7 +148,7 @@ namespace СоцСеть {
 	static string НовыйДруг(int номер, string имя)
         {
             Пользователь п = соцСеть.НайтиПользователя(имя);
-	    if (активныеПользователи.ContainsKey(номер) == true)
+	    if (активныеПользователи.ContainsKey(номер))
 		if (п != null)
 		{
 		    активныеПользователи[номер].ДобавитьДруга(п);
@@ -189,6 +173,8 @@ namespace СоцСеть {
 
 	public static string ОтобразитьСтену(int код)
         {
+	    if (!активныеПользователи.ContainsKey(код))
+		return "Пользователь не авторизован";
 	    List<Сообщение> сообщения = активныеПользователи[код].ПолучитьСтену().ПолучитьПубликации();
             string board = "";
             if (сообщения.Count > 10)
