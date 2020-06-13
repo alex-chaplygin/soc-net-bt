@@ -60,5 +60,15 @@ namespace СоцСеть {
 	    } else
 		System.Console.WriteLine("Не найдены пользователи " + имя1 + " " + имя2);
 	}
+	
+	public List<Пользователь> ВернутьПользователей()
+        {
+            return пользователи;
+        }
+	
+        public List<Чат> ПолучитьЧаты()
+        {
+            return чаты;
+        }
     }  
 }
