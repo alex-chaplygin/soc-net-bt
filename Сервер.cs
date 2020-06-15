@@ -147,20 +147,24 @@ namespace СоцСеть {
 
 	static string ПрикрепитьИзображение(int номер, string path)
         {
-            if (File.Exists(path) == false)
-                return "Файл не найден";
             if (активныеПользователи.ContainsKey(номер) == false)
-                return "Пользователь не найден";
-            string расширение = Path.GetExtension(path);
-            if (расширение == ".png" || расширение == ".jpeg" || расширение == ".bmp" || расширение == ".gif" || расширение == ".tiff")
+                return "Пользователь не авторизован";
+            if (File.Exists(path) == false)
+                return "Файл не найден " + path;
+            try
             {
                 Image img = Image.FromFile(path);
-                List<Сообщение> п = активныеПользователи[номер].ПолучитьСтену().ПолучитьПубликации();
-                п[п.Count - 1].ДобавитьИзображение(img);
+                List<Сообщение> публикации = активныеПользователи[номер].ПолучитьСтену().ПолучитьПубликации();
+                if (публикации == null)
+                    return "На стене нет публикаций";
+                int index = публикации.Count - 1;
+                публикации[index].ДобавитьИзображение(img);
                 return "Изображение добавлено";
             }
-            else
-                return "Формат не соответствует поддерживаемому";
+            catch(FormatException e)
+            {
+                return Convert.ToString(e);
+            }
         }
     }
 }
