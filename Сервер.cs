@@ -201,10 +201,10 @@ namespace СоцСеть {
 	    List<Сообщение> сообщения = активныеПользователи[код].ПолучитьСтену().ПолучитьПубликации();
             string board = "";
 	    if (сообщения.Count > 10 + num)
-                for (int i = сообщения.Count - 10 - num; i < сообщения.Count - num; i++)
+		for (int i = сообщения.Count - 10 - num; i < сообщения.Count - num - 1; i++)
                     board += сообщения[i].ПолучитьТекст() + "\n";
             else
-                for (int i = 0; i < сообщения.Count; i++)
+                for (int i = сообщения.Count - num; i < сообщения.Count; i++)
                     board += сообщения[i].ПолучитьТекст() + "\n";
             return board;
 	}
