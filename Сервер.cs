@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace СоцСеть {
     class Сервер {
@@ -80,6 +81,8 @@ namespace СоцСеть {
 		    ответ = Выход(команда[1]);
 		else if (команда[0] == "Сообщение")
 		    ответ = Сообщение(команда[1], команда[2], String.Join(" ", команда, 3, команда.Length - 3));
+		else if (команда[0] == "Прикрепить")
+                    ответ = ПрикрепитьИзображение(Convert.ToInt32(команда[1]), команда[2]);
 		else
 		    ответ = "Неизвестная команда";
 	    } catch (Exception e) {
@@ -140,6 +143,24 @@ namespace СоцСеть {
 		return "Успешная регистрация";
 	    }
 	    else return "Пользователь с таким именем уже зарегистрирован";
+        }
+
+	static string ПрикрепитьИзображение(int номер, string path)
+        {
+            if (File.Exists(path) == false)
+                return "Файл не найден";
+            if (активныеПользователи.ContainsKey(номер) == false)
+                return "Пользователь не найден";
+            string расширение = Path.GetExtension(path);
+            if (расширение == ".png" || расширение == ".jpeg" || расширение == ".bmp" || расширение == ".gif" || расширение == ".tiff")
+            {
+                Image img = Image.FromFile(path);
+                List<Сообщение> п = активныеПользователи[номер].ПолучитьСтену().ПолучитьПубликации();
+                п[п.Count - 1].ДобавитьИзображение(img);
+                return "Изображение добавлено";
+            }
+            else
+                return "Формат не соответствует поддерживаемому";
         }
     }
 }
