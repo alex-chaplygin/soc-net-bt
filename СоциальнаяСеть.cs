@@ -4,10 +4,12 @@ namespace СоцСеть {
     class СоциальнаяСеть {
 	List<Пользователь> пользователи;
 	List<Чат> чаты;
+	List<Группа> группы;
 
 	public СоциальнаяСеть() {
 	    пользователи = new List<Пользователь>();
 	    чаты = new List<Чат>();
+	    группы = new List<Группа>();
 	}
 
 	public Пользователь Регистрация(string имя, string пароль)
@@ -71,6 +73,33 @@ namespace СоцСеть {
         public List<Чат> ПолучитьЧаты()
         {
             return чаты;
+	}
+
+	public Группа НайтиГруппу(string name)
+        {
+            foreach (Группа г in группы)
+                if (г.ПолучитьНазвание() == name)
+                    return г;
+            return null;
+        }
+	
+        public void ДобавитьГруппу(string name)
+        {
+            if (НайтиГруппу(name) != null)
+                return;
+            группы.Add(new Группа(name));
+        }
+	
+        public void УдалитьГруппу(string name)
+        {
+            группы.Remove(НайтиГруппу(name));
+        }
+	
+        public void ПодписатьсяНаГруппу(Пользователь п, string name)
+        {
+            if (НайтиГруппу(name) != null)
+                return;
+            НайтиГруппу(name).Подписаться(п);
         }
     }  
 }
