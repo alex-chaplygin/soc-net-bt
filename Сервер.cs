@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Drawing;
 
 namespace СоцСеть {
     class Сервер {
@@ -80,6 +81,8 @@ namespace СоцСеть {
                     ответ = ОтобразитьСтену(Convert.ToInt32(команда[1]));
 		else if (команда[0] == "Онлайн")
                     ответ = ПроверкаОнлайн(Convert.ToInt32(команда[1]), команда[2]);
+		else if (команда[0] == "Прикрепить")
+                    ответ = ПрикрепитьИзображение(Convert.ToInt32(команда[1]), команда[2]);
 		else
 		    ответ = "Неизвестная команда";
 	    } catch (Exception e) {
@@ -266,6 +269,28 @@ namespace СоцСеть {
                     swСтены.WriteLine($"{п.ПолучитьИмя()}:{с.ПолучитьТекст()}");
             }
             swСтены.Close();
+	}
+
+	static string ПрикрепитьИзображение(int номер, string path)
+        {
+            if (активныеПользователи.ContainsKey(номер) == false)
+                return "Пользователь не авторизован";
+            if (File.Exists(path) == false)
+                return "Файл не найден " + path;
+            try
+            {
+                Image img = Image.FromFile(path);
+                List<Сообщение> публикации = активныеПользователи[номер].ПолучитьСтену().ПолучитьПубликации();
+                if (публикации.Count == 0)
+                    return "На стене нет публикаций";
+                int index = публикации.Count - 1;
+                публикации[index].ДобавитьИзображение(img);
+                return "Изображение добавлено";
+            }
+            catch(FormatException e)
+            {
+                return Convert.ToString(e);
+            }
         }
     }
 }
