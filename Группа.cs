@@ -8,24 +8,29 @@ namespace СоцСеть
 {
     class Группа
     {
-        string name;
-        List<Пользователь> subscribers;
-        public Группа(string name)
+        string название;
+        List<Пользователь> участники;
+	
+        public Группа(string название)
         {
-            this.name = name;
+            this.название = название;
         }
+	
         public string ПолучитьНазвание()
         {
-            return name;
+            return название;
         }
+	
         public List<Пользователь> ПолучитьУчастников()
         {
-            return subscribers;
+            return участники;
         }
-        public void ИзменитьНазвание(string name)
+	
+        public void ИзменитьНазвание(string название)
         {
-            this.name = name;
+            this.название = название;
         }
+	
         public void Подписаться(Пользователь п)
         {
             subscribers.Add(п);
