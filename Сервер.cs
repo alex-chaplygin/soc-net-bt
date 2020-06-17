@@ -249,6 +249,7 @@ namespace СоцСеть {
 
 	static void Загрузить()
         {
+	    StreamReader srКомментарии = new StreamReader("комментарии.txt");
             StreamReader srПользователи = new StreamReader("пользователи.txt");
             StreamReader srСообщения = new StreamReader("сообщения.txt");
             StreamReader srСтены = new StreamReader("стены.txt");
@@ -262,10 +263,14 @@ namespace СоцСеть {
             while ((line = srСтены.ReadLine()) != null)
                 соцСеть.НайтиПользователя(line.Split(':')[0]).Опубликовать(line.Split(':')[1]);
             srСтены.Close();
+            while ((line = srКомментарии.ReadLine()) != null)
+                соцСеть.НайтиПользователя(line.Split(':')[0]).ПолучитьСтену().ПолучитьПубликации()[Convert.ToInt32(line.Split(':')[1])].ДобавитьКомментарий(line.Split(':')[2]);
+            srКомментарии.Close();
         }
 	
         static void Сохранить()
         {
+	    StreamWriter swКомментарии = new StreamWriter("комментарии.txt");
             StreamWriter swПользователи = new StreamWriter("пользователи.txt");
             StreamWriter swСообщения = new StreamWriter("сообщения.txt");
             StreamWriter swСтены = new StreamWriter("стены.txt");
@@ -279,7 +284,9 @@ namespace СоцСеть {
             {
                 сообщения = ч.ПолучитьСообщения();
                 foreach (Сообщение с in сообщения)
+                {
                     swСообщения.WriteLine($"{ч.ПолучитьПользователя1()}:{ч.ПолучитьПользователя2()}:{с.ПолучитьТекст()}");
+                }
             }
             swСообщения.Close();
             foreach (Пользователь п in пользователи)
@@ -289,6 +296,14 @@ namespace СоцСеть {
                     swСтены.WriteLine($"{п.ПолучитьИмя()}:{с.ПолучитьТекст()}");
             }
             swСтены.Close();
+	    foreach (Пользователь п in пользователи)
+            {
+                сообщения = п.ПолучитьСтену().ПолучитьПубликации();
+                for (int j = 0; j < сообщения.Count; j++)
+                    for (int i = 0; i < сообщения[j].ПолучитьКомментарии().Count; i++)
+                        swКомментарии.WriteLine($"{п.ПолучитьИмя()}:{j}:{сообщения[j].ПолучитьКомментарии()[i]}");
+            }
+	    swКомментарии.Close();
 	}
 
 	static string ПрикрепитьИзображение(int номер, string path)
