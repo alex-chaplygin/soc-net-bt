@@ -12,6 +12,7 @@ namespace СоцСеть
         private string текст;
         private List<Image> изображения;
 	private List<string> комментарии;
+	private DateTime время;
 
         public Сообщение(Пользователь п)
         {
@@ -19,6 +20,7 @@ namespace СоцСеть
             текст = "";
 	    изображения = new List<Image>();
 	    комментарии = new List<string>();
+	    время = DateTime.Now;
         }
 	
         public Сообщение(Пользователь п, string с)
@@ -26,6 +28,21 @@ namespace СоцСеть
             пользователь = п;
             текст = с;
 	    изображения = new List<Image>();
+	    время = DateTime.Now;
+        }
+
+	public Сообщение(Пользователь п, string с, string время)
+        {
+            пользователь = п;
+            текст = "";
+            изображения = new List<Image>();
+            комментарии = new List<string>();
+            this.время = DateTime.Parse(время);
+        }
+
+	public DateTime ПолучитьВремя()
+        {
+            return время;
         }
 	
         public Пользователь ПолучитьПользователя()

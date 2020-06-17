@@ -226,7 +226,7 @@ namespace СоцСеть {
 
 	static void Загрузить()
         {
-            StreamReader srПользователи = new StreamReader("пользователи.txt");
+	    StreamReader srПользователи = new StreamReader("пользователи.txt");
             StreamReader srСообщения = new StreamReader("сообщения.txt");
             StreamReader srСтены = new StreamReader("стены.txt");
             string line;
@@ -234,7 +234,7 @@ namespace СоцСеть {
                 соцСеть.Регистрация(line.Split(':')[0], line.Split(':')[1]);
             srПользователи.Close();
             while ((line = srСообщения.ReadLine()) != null)
-                Сообщение(line.Split(':')[0], line.Split(':')[1], line.Split(':')[2]);
+                Сообщение(line.Split(':')[1], line.Split(':')[2], line.Split(':')[3], line.Split(':')[0]);
             srСообщения.Close();
             while ((line = srСтены.ReadLine()) != null)
                 соцСеть.НайтиПользователя(line.Split(':')[0]).Опубликовать(line.Split(':')[1]);
@@ -243,7 +243,7 @@ namespace СоцСеть {
 	
         static void Сохранить()
         {
-            StreamWriter swПользователи = new StreamWriter("пользователи.txt");
+	    StreamWriter swПользователи = new StreamWriter("пользователи.txt");
             StreamWriter swСообщения = new StreamWriter("сообщения.txt");
             StreamWriter swСтены = new StreamWriter("стены.txt");
             List<Пользователь> пользователи = соцСеть.ВернутьПользователей();
@@ -256,7 +256,7 @@ namespace СоцСеть {
             {
                 сообщения = ч.ПолучитьСообщения();
                 foreach (Сообщение с in сообщения)
-                    swСообщения.WriteLine($"{ч.ПолучитьПользователя1()}:{ч.ПолучитьПользователя2()}:{с.ПолучитьТекст()}");
+                    swСообщения.WriteLine($"{с.ПолучитьВремя()}:{ч.ПолучитьПользователя1().ПолучитьИмя()}:{ч.ПолучитьПользователя2().ПолучитьИмя()}:{с.ПолучитьТекст()}");
             }
             swСообщения.Close();
             foreach (Пользователь п in пользователи)
