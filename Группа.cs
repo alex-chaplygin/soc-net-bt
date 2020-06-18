@@ -33,7 +33,7 @@ namespace СоцСеть
 	
         public void Подписаться(Пользователь п)
         {
-            subscribers.Add(п);
+            участники.Add(п);
         }
     }
 }
