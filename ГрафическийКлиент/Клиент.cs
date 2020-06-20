@@ -17,7 +17,6 @@ namespace ГрафическийКлиент
             port = p;
         }
 
-
         public string ОтправитьПолучить(string запрос)
         {
             TcpClient client = new TcpClient(ip, port);

@@ -8,6 +8,7 @@ namespace ГрафическийКлиент
 {
     static class Program
     {
+        public static Клиент пользователь;
         public static string[] MassArgs;
         /// <summary>
         /// Главная точка входа для приложения.
