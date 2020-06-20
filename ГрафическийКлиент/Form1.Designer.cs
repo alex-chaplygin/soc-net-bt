@@ -41,19 +41,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(318, 134);
+            this.textBox1.Location = new System.Drawing.Point(338, 110);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(182, 20);
             this.textBox1.TabIndex = 0;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(318, 176);
+            this.textBox2.Location = new System.Drawing.Point(338, 152);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(182, 20);
             this.textBox2.TabIndex = 1;
@@ -61,7 +62,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(252, 137);
+            this.label1.Location = new System.Drawing.Point(272, 113);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 2;
@@ -70,7 +71,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(252, 179);
+            this.label2.Location = new System.Drawing.Point(272, 155);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 3;
@@ -78,9 +79,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(403, 242);
+            this.button1.Location = new System.Drawing.Point(391, 218);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 72);
+            this.button1.Size = new System.Drawing.Size(129, 72);
             this.button1.TabIndex = 4;
             this.button1.Text = "Войти";
             this.button1.UseVisualStyleBackColor = true;
@@ -88,9 +89,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(232, 242);
+            this.button2.Location = new System.Drawing.Point(252, 218);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(144, 72);
+            this.button2.Size = new System.Drawing.Size(133, 72);
             this.button2.TabIndex = 5;
             this.button2.Text = "Зарегистрироваться";
             this.button2.UseVisualStyleBackColor = true;
@@ -98,9 +99,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(232, 320);
+            this.button3.Location = new System.Drawing.Point(252, 296);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(95, 49);
+            this.button3.Size = new System.Drawing.Size(133, 72);
             this.button3.TabIndex = 6;
             this.button3.Text = "Выход";
             this.button3.UseVisualStyleBackColor = true;
@@ -109,43 +110,43 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(169, 56);
+            this.textBox3.Location = new System.Drawing.Point(265, 136);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(115, 20);
+            this.textBox3.Size = new System.Drawing.Size(148, 20);
             this.textBox3.TabIndex = 7;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(169, 98);
+            this.textBox4.Location = new System.Drawing.Point(265, 178);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(86, 20);
+            this.textBox4.Size = new System.Drawing.Size(148, 20);
             this.textBox4.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(124, 56);
+            this.label3.Location = new System.Drawing.Point(239, 139);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.Size = new System.Drawing.Size(20, 13);
             this.label3.TabIndex = 9;
-            this.label3.Text = "АЙпи";
+            this.label3.Text = "IP:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(124, 98);
+            this.label4.Location = new System.Drawing.Point(224, 181);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Порт";
+            this.label4.Text = "Порт:";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(169, 168);
+            this.button4.Location = new System.Drawing.Point(265, 219);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(97, 72);
+            this.button4.Size = new System.Drawing.Size(148, 33);
             this.button4.TabIndex = 11;
-            this.button4.Text = "Задать сеть";
+            this.button4.Text = "Подключиться";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -156,12 +157,23 @@
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Location = new System.Drawing.Point(169, 74);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox1.Location = new System.Drawing.Point(64, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(509, 295);
+            this.groupBox1.Size = new System.Drawing.Size(657, 368);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(391, 296);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(129, 72);
+            this.button5.TabIndex = 13;
+            this.button5.Text = "Ввод команд";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
@@ -176,9 +188,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button5);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "м";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -201,6 +215,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button5;
     }
 }
 

@@ -13,6 +13,7 @@ namespace ГрафическийКлиент
     public partial class Form1 : Form
     {
         Клиент п;
+        public static int номерПользователя;
         public Form1()
         {
             InitializeComponent();
@@ -27,25 +28,33 @@ namespace ГрафическийКлиент
         private void button1_Click(object sender, EventArgs e)
         {
             string mess = "Авторизация" + " " + textBox1.Text + " " + textBox2.Text;
-            MessageBox.Show(п.ОтправитьПолучить(mess));
-            button3.Visible = true;
+            string returned = п.ОтправитьПолучить(mess);
+            MessageBox.Show(returned);
+            if (returned != "Неверное имя пользователя или пароль")
+            {
+                номерПользователя = Convert.ToInt32(returned);
+                Board.board.Show();
+                button3.Visible = true;
+                button5.Visible = true;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string mess = "Выход" + " " + textBox1.Text;
+            string mess = $"Выход {номерПользователя}";
             MessageBox.Show(п.ОтправитьПолучить(mess));
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            п = new Клиент(textBox3.Text, Convert.ToInt32(textBox4.Text));
+            Program.пользователь = new Клиент(textBox3.Text, Convert.ToInt32(textBox4.Text));
+            п = Program.пользователь;
             groupBox1.Visible = false;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Commands.c.Show();
         }
     }
 }
