@@ -13,6 +13,8 @@ namespace ГрафическийКлиент
     public partial class Board : Form
     {
         public static Board board = new Board();
+        static bool commFlag = false;
+        static Control[] controlGroup;
         public Board()
         {
             InitializeComponent();
@@ -26,7 +28,69 @@ namespace ГрафическийКлиент
                 text = Program.пользователь.ОтправитьПолучить($"Стена {Form1.номерПользователя} {res}");
             else
                 text = Program.пользователь.ОтправитьПолучить($"Стена {Form1.номерПользователя} {0}");
-            textBoxBoard.Text = text;
+            textBoxBoard.Text = text + Environment.NewLine;
+        }
+
+        private void Board_Load(object sender, EventArgs e)
+        {
+            
+            Program.пользователь.ОтправитьПолучить("СписокПользователей");
+            string userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} false");
+            foreach (string s in userlist.Split('\n'))
+                if (s != "")
+                    userList.Items.Add(s);
+            controlGroup = new Control[] { labelComms, textBoxComm, textBoxComms, buttonComm };
+            foreach (Control c in controlGroup)
+                c.Visible = false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            userList.Items.Clear();
+            string userlist;
+            userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} false");
+            if (checkBox1.Checked == true)
+                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} false");
+            else
+                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} true");
+            foreach (string s in userlist.Split('\n'))
+                if (s != "")
+                    userList.Items.Add(s);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (Form1.имяПользователя != Convert.ToString(userList.SelectedItem))
+            {
+                Program.пользователь.ОтправитьПолучить($"Сообщение {Form1.номерПользователя} {userList.SelectedItem} {textBox2.Text}");
+                textBoxBoard.Text += $"Вы -> {userList.SelectedItem}: {textBox2.Text}{Environment.NewLine}";
+            }
+            else textBoxBoard.Text += $"Нельзя отправить сообщение себе{Environment.NewLine}";
+            textBox2.Clear();
+        }
+
+        private void buttonComms_Click(object sender, EventArgs e)
+        {
+            if (commFlag == false)
+            {
+                board.Size = new Size(board.Size.Width + 500, board.Size.Height);
+                foreach (Control c in controlGroup)
+                    c.Visible = true;
+                commFlag = true;
+            }
+            else
+            {
+                board.Size = new Size(board.Size.Width - 500, board.Size.Height);
+                foreach (Control c in controlGroup)
+                    c.Visible = false;
+                commFlag = false;
+            }
+        }
+
+        private void buttonComm_Click(object sender, EventArgs e)
+        {
+            textBoxComms.Text += Program.пользователь.ОтправитьПолучить(textBoxComm.Text) + Environment.NewLine;
+            textBoxComm.Clear();
         }
     }
 }
