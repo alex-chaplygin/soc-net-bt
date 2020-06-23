@@ -41,7 +41,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,7 +100,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(252, 296);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(133, 72);
+            this.button3.Size = new System.Drawing.Size(268, 72);
             this.button3.TabIndex = 6;
             this.button3.Text = "Выход";
             this.button3.UseVisualStyleBackColor = true;
@@ -158,22 +157,11 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBox3);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox1.Location = new System.Drawing.Point(64, 42);
+            this.groupBox1.Location = new System.Drawing.Point(74, 43);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(657, 368);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(391, 296);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(129, 72);
-            this.button5.TabIndex = 13;
-            this.button5.Text = "Ввод команд";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Visible = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
@@ -188,7 +176,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button5);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -215,7 +202,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button5;
     }
 }
 

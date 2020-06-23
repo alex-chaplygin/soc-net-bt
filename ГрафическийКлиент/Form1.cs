@@ -14,6 +14,7 @@ namespace ГрафическийКлиент
     {
         Клиент п;
         public static int номерПользователя;
+        public static string имяПользователя;
         public Form1()
         {
             InitializeComponent();
@@ -33,9 +34,9 @@ namespace ГрафическийКлиент
             if (returned != "Неверное имя пользователя или пароль")
             {
                 номерПользователя = Convert.ToInt32(returned);
+                имяПользователя = textBox2.Text;
                 Board.board.Show();
                 button3.Visible = true;
-                button5.Visible = true;
             }
         }
 
@@ -50,11 +51,6 @@ namespace ГрафическийКлиент
             Program.пользователь = new Клиент(textBox3.Text, Convert.ToInt32(textBox4.Text));
             п = Program.пользователь;
             groupBox1.Visible = false;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            Commands.c.Show();
         }
     }
 }
