@@ -93,6 +93,8 @@ namespace СоцСеть {
                     ответ = СписокКомментариев(Convert.ToInt32(команда[1]), команда[2], Convert.ToInt32(команда[3]), Convert.ToInt32(команда[4]));
 		else if (команда[0] == "Список")
 		    ответ = Список(Convert.ToInt32(команда[1]), команда[2], Convert.ToInt32(команда[3]));
+		else if (команда[0] == "СписокПользователей")
+                    ответ = СписокПользователей(Convert.ToInt32(команда[1]), Convert.ToBoolean(команда[2]));
 		else
 		    ответ = "Неизвестная команда";
 	    } catch (Exception e) {
@@ -412,6 +414,20 @@ namespace СоцСеть {
                 return сообщения;
             }
             else return "Сообщений нет";
+        }
+
+	static string СписокПользователей(int код, bool IsActive)
+        {
+            if (!активныеПользователи.ContainsKey(код))
+                return "Пользователь не авторизован";
+            string список = "";
+            if (IsActive == true)
+                foreach (KeyValuePair<int, Пользователь> kvp in активныеПользователи)
+                    список += kvp.Value.ПолучитьИмя() + "\n";
+            else
+                foreach (Пользователь п in соцСеть.ВернутьПользователей())
+                    список += п.ПолучитьИмя() + "\n";
+            return список;
         }
     }
 }
