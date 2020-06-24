@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Drawing;
+using System.Security.Cryptography;
 
 namespace СоцСеть {
     class Сервер {
@@ -107,9 +108,9 @@ namespace СоцСеть {
 
 	static string Авторизация(string имя, string пароль)
 	{
-	    int номер = НайтиПользователя(имя, пароль);
+	    int номер = НайтиПользователя(имя, HashCalculate(пароль));
 	    if (номер == -1) {
-		Пользователь п = соцСеть.Авторизация(имя, пароль);
+		Пользователь п = соцСеть.Авторизация(имя, HashCalculate(пароль));
 		if (п == null) return "Неверное имя пользователя или пароль";
 		else {
 		    номер = ПолучитьНомер();
@@ -174,7 +175,7 @@ namespace СоцСеть {
 
 	static string Регистрация(string имя, string пароль)
         {
-	    Пользователь п = соцСеть.Регистрация(имя, пароль);
+	    Пользователь п = соцСеть.Регистрация(имя, HashCalculate(пароль));
 	    if (п != null)
 	    {
 		активныеПользователи.Add(ПолучитьНомер(), п);
@@ -431,6 +432,17 @@ namespace СоцСеть {
                 foreach (Пользователь п in соцСеть.ВернутьПользователей())
                     список += п.ПолучитьИмя() + "\n";
             return список;
+        }
+
+	static string HashCalculate(string line)
+        {
+            byte[] hash = Encoding.ASCII.GetBytes(line);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] hashed = md5.ComputeHash(hash);
+            string res = "";
+            foreach (var v in hashed)
+                res += v.ToString();
+            return res;
         }
     }
 }
