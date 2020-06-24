@@ -1,0 +1,11 @@
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\bin\Debug\ГрафическийКлиент.exe.config
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\bin\Debug\ГрафическийКлиент.exe
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\bin\Debug\ГрафическийКлиент.pdb
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.csprojAssemblyReference.cache
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.Form1.resources
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.Properties.Resources.resources
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.csproj.GenerateResource.cache
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.csproj.CoreCompileInputs.cache
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.exe
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.pdb
+C:\Users\barko\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.Board.resources
