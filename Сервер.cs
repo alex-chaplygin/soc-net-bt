@@ -100,6 +100,8 @@ namespace СоцСеть {
                     ответ = УдалитьПубликацию(Convert.ToInt32(команда[1]), Convert.ToInt32(команда[2]));
                 else if (команда[0] == "Удалить")
                     ответ = УдалитьПользователя(команда[1], команда[2]);
+		else if (команда[0] == "Файл")
+                    ответ = Файл(команда[1], команда[2]);
 		else
 		    ответ = "Неизвестная команда";
 	    } catch (Exception e) {
@@ -489,6 +491,16 @@ namespace СоцСеть {
                 if (k.Value.ПолучитьИмя() == имя)
                     активныеПользователи.Remove(k.Key);
             return $"Пользователь \"{имя}\" удален";
+        }
+
+	static string Файл(string fileName, string encodedFile)
+        {
+            if (!Directory.Exists("Загрузки"))
+                Directory.CreateDirectory("Загрузки");
+            fileName = $@"Загрузки/{fileName}";
+	    var file = Convert.FromBase64String(encodedFile);
+            File.WriteAllBytes(fileName, file);
+            return $"Файл \"{fileName}\" загружен на сервер";
         }
     }
 }
