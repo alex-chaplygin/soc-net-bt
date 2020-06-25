@@ -482,9 +482,8 @@ namespace СоцСеть {
             if (!Directory.Exists("Загрузки"))
                 Directory.CreateDirectory("Загрузки");
             fileName = $@"Загрузки/{fileName}";
-            var file = Convert.FromBase64String(encodedFile);
-            string decodedFile = Encoding.UTF8.GetString(file);
-            File.WriteAllText(fileName, decodedFile);
+	    var file = Convert.FromBase64String(encodedFile);
+            File.WriteAllBytes(fileName, file);
             return $"Файл \"{fileName}\" загружен на сервер";
         }
     }
