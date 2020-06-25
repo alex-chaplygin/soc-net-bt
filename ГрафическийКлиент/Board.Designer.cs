@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxBoard = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
+            this.textBoxMsgs = new System.Windows.Forms.TextBox();
             this.buttonGetBoard = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
@@ -43,23 +44,25 @@
             this.textBoxComm = new System.Windows.Forms.TextBox();
             this.labelComms = new System.Windows.Forms.Label();
             this.buttonComm = new System.Windows.Forms.Button();
+            this.textBoxBoard = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // textBoxBoard
+            // textBoxMsgs
             // 
-            this.textBoxBoard.Location = new System.Drawing.Point(189, 12);
-            this.textBoxBoard.MaxLength = 327670;
-            this.textBoxBoard.Multiline = true;
-            this.textBoxBoard.Name = "textBoxBoard";
-            this.textBoxBoard.ReadOnly = true;
-            this.textBoxBoard.Size = new System.Drawing.Size(701, 436);
-            this.textBoxBoard.TabIndex = 0;
+            this.textBoxMsgs.Location = new System.Drawing.Point(189, 12);
+            this.textBoxMsgs.MaxLength = 327670;
+            this.textBoxMsgs.Multiline = true;
+            this.textBoxMsgs.Name = "textBoxMsgs";
+            this.textBoxMsgs.ReadOnly = true;
+            this.textBoxMsgs.Size = new System.Drawing.Size(341, 436);
+            this.textBoxMsgs.TabIndex = 0;
             // 
             // buttonGetBoard
             // 
-            this.buttonGetBoard.Location = new System.Drawing.Point(633, 459);
+            this.buttonGetBoard.Location = new System.Drawing.Point(797, 451);
             this.buttonGetBoard.Name = "buttonGetBoard";
-            this.buttonGetBoard.Size = new System.Drawing.Size(124, 23);
+            this.buttonGetBoard.Size = new System.Drawing.Size(93, 23);
             this.buttonGetBoard.TabIndex = 1;
             this.buttonGetBoard.Text = "Получить стену";
             this.buttonGetBoard.UseVisualStyleBackColor = true;
@@ -68,24 +71,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(193, 464);
+            this.label1.Location = new System.Drawing.Point(534, 458);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 13);
+            this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Имя пользователя:";
+            this.label1.Text = "Имя:";
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(305, 461);
+            this.textBoxName.Location = new System.Drawing.Point(572, 453);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(276, 20);
+            this.textBoxName.Size = new System.Drawing.Size(189, 20);
             this.textBoxName.TabIndex = 3;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(587, 461);
+            this.textBox1.Location = new System.Drawing.Point(767, 453);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(40, 20);
+            this.textBox1.Size = new System.Drawing.Size(24, 20);
             this.textBox1.TabIndex = 4;
             // 
             // userList
@@ -110,7 +113,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(231, 489);
+            this.label2.Location = new System.Drawing.Point(186, 456);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 7;
@@ -118,14 +121,14 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(305, 486);
+            this.textBox2.Location = new System.Drawing.Point(260, 453);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(322, 20);
+            this.textBox2.Size = new System.Drawing.Size(270, 20);
             this.textBox2.TabIndex = 8;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(633, 486);
+            this.button1.Location = new System.Drawing.Point(292, 479);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 23);
             this.button1.TabIndex = 9;
@@ -135,11 +138,11 @@
             // 
             // buttonComms
             // 
-            this.buttonComms.Location = new System.Drawing.Point(815, 461);
+            this.buttonComms.Location = new System.Drawing.Point(863, 494);
             this.buttonComms.Name = "buttonComms";
-            this.buttonComms.Size = new System.Drawing.Size(75, 48);
+            this.buttonComms.Size = new System.Drawing.Size(43, 23);
             this.buttonComms.TabIndex = 10;
-            this.buttonComms.Text = "Команды";
+            this.buttonComms.Text = "cmd";
             this.buttonComms.UseVisualStyleBackColor = true;
             this.buttonComms.Click += new System.EventHandler(this.buttonComms_Click);
             // 
@@ -178,11 +181,27 @@
             this.buttonComm.UseVisualStyleBackColor = true;
             this.buttonComm.Click += new System.EventHandler(this.buttonComm_Click);
             // 
+            // textBoxBoard
+            // 
+            this.textBoxBoard.Location = new System.Drawing.Point(537, 12);
+            this.textBoxBoard.Multiline = true;
+            this.textBoxBoard.Name = "textBoxBoard";
+            this.textBoxBoard.ReadOnly = true;
+            this.textBoxBoard.Size = new System.Drawing.Size(353, 437);
+            this.textBoxBoard.TabIndex = 15;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Board
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 522);
+            this.ClientSize = new System.Drawing.Size(918, 529);
+            this.Controls.Add(this.textBoxBoard);
             this.Controls.Add(this.buttonComm);
             this.Controls.Add(this.labelComms);
             this.Controls.Add(this.textBoxComm);
@@ -197,7 +216,7 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonGetBoard);
-            this.Controls.Add(this.textBoxBoard);
+            this.Controls.Add(this.textBoxMsgs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Board";
@@ -210,7 +229,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxBoard;
+        private System.Windows.Forms.TextBox textBoxMsgs;
         private System.Windows.Forms.Button buttonGetBoard;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxName;
@@ -225,5 +244,7 @@
         private System.Windows.Forms.TextBox textBoxComm;
         private System.Windows.Forms.Label labelComms;
         private System.Windows.Forms.Button buttonComm;
+        private System.Windows.Forms.TextBox textBoxBoard;
+        private System.Windows.Forms.Timer timer1;
     }
 }

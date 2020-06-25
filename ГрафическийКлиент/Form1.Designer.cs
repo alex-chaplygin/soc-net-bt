@@ -113,6 +113,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(148, 20);
             this.textBox3.TabIndex = 7;
+            this.textBox3.Text = "localhost";
             // 
             // textBox4
             // 
@@ -120,6 +121,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(148, 20);
             this.textBox4.TabIndex = 8;
+            this.textBox4.Text = "25565";
             // 
             // label3
             // 

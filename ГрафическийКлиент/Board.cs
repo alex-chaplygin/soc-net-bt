@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace ГрафическийКлиент
@@ -13,6 +15,7 @@ namespace ГрафическийКлиент
     public partial class Board : Form
     {
         public static Board board = new Board();
+        static System.Timers.Timer timer;
         static bool commFlag = false;
         static Control[] controlGroup;
         public Board()
@@ -33,7 +36,6 @@ namespace ГрафическийКлиент
 
         private void Board_Load(object sender, EventArgs e)
         {
-            
             Program.пользователь.ОтправитьПолучить("СписокПользователей");
             string userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} false");
             foreach (string s in userlist.Split('\n'))
@@ -63,9 +65,9 @@ namespace ГрафическийКлиент
             if (Form1.имяПользователя != Convert.ToString(userList.SelectedItem))
             {
                 Program.пользователь.ОтправитьПолучить($"Сообщение {Form1.номерПользователя} {userList.SelectedItem} {textBox2.Text}");
-                textBoxBoard.Text += $"Вы -> {userList.SelectedItem}: {textBox2.Text}{Environment.NewLine}";
+                textBoxMsgs.Text += $"Вы -> {userList.SelectedItem}: {textBox2.Text}{Environment.NewLine}";
             }
-            else textBoxBoard.Text += $"Нельзя отправить сообщение себе{Environment.NewLine}";
+            else textBoxMsgs.Text += $"Нельзя отправить сообщение себе{Environment.NewLine}";
             textBox2.Clear();
         }
 
@@ -91,6 +93,16 @@ namespace ГрафическийКлиент
         {
             textBoxComms.Text += Program.пользователь.ОтправитьПолучить(textBoxComm.Text) + Environment.NewLine;
             textBoxComm.Clear();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (userList.SelectedItem == null)
+                return;
+            textBoxMsgs.Clear();
+            string[] text = Program.пользователь.ОтправитьПолучить($"Список {Form1.номерПользователя} {Convert.ToString(userList.SelectedItem)} 0").Split('~');
+            foreach (string t in text)
+                textBoxMsgs.Text += t + Environment.NewLine;
         }
     }
 }
