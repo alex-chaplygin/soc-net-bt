@@ -23,15 +23,18 @@ namespace ГрафическийКлиент
         private void button2_Click(object sender, EventArgs e)
         {
             string mess = "Регистрация" + " " + textBox1.Text + " " + textBox2.Text;
-            MessageBox.Show(п.ОтправитьПолучить(mess));
+            string returned = п.ОтправитьПолучить(mess);
+            if (returned != "Ошибка подключения")
+                MessageBox.Show(returned);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string mess = "Авторизация" + " " + textBox1.Text + " " + textBox2.Text;
             string returned = п.ОтправитьПолучить(mess);
-            MessageBox.Show(returned);
-            if (returned != "Неверное имя пользователя или пароль")
+            if (returned != "Ошибка подключения")
+                MessageBox.Show(returned);
+            if (returned != "Неверное имя пользователя или пароль" && returned != "Ошибка подключения")
             {
                 номерПользователя = Convert.ToInt32(returned);
                 имяПользователя = textBox2.Text;
@@ -48,9 +51,16 @@ namespace ГрафическийКлиент
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Program.пользователь = new Клиент(textBox3.Text, Convert.ToInt32(textBox4.Text));
-            п = Program.пользователь;
-            groupBox1.Visible = false;
+            try
+            {
+                Program.пользователь = new Клиент(textBox3.Text, Convert.ToInt32(textBox4.Text));
+                п = Program.пользователь;
+                groupBox1.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

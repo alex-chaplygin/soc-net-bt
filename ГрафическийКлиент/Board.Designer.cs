@@ -46,7 +46,6 @@
             this.buttonComm = new System.Windows.Forms.Button();
             this.textBoxBoard = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // textBoxMsgs
@@ -193,26 +192,15 @@
             // 
             // timer1
             // 
+            this.timer1.Enabled = true;
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(12, 479);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(140, 17);
-            this.checkBox2.TabIndex = 16;
-            this.checkBox2.Text = "Получение сообщений";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // Board
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 529);
-            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.textBoxBoard);
             this.Controls.Add(this.buttonComm);
             this.Controls.Add(this.labelComms);
@@ -258,6 +246,5 @@
         private System.Windows.Forms.Button buttonComm;
         private System.Windows.Forms.TextBox textBoxBoard;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

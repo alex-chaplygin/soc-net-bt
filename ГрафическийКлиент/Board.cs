@@ -15,7 +15,7 @@ namespace ГрафическийКлиент
     public partial class Board : Form
     {
         public static Board board = new Board();
-//        static System.Timers.Timer timer;
+        static System.Timers.Timer timer;
         static bool commFlag = false;
         static Control[] controlGroup;
         public Board()
@@ -103,14 +103,6 @@ namespace ГрафическийКлиент
             string[] text = Program.пользователь.ОтправитьПолучить($"Список {Form1.номерПользователя} {Convert.ToString(userList.SelectedItem)} 0").Split('~');
             foreach (string t in text)
                 textBoxMsgs.Text += t + Environment.NewLine;
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (timer1.Enabled)
-                timer1.Enabled = false;
-            else
-                timer1.Enabled = true;
         }
     }
 }
