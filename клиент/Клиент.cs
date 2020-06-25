@@ -22,7 +22,15 @@ namespace СоцСеть {
 		StreamReader reader = new StreamReader(stream);
 		StreamWriter writer = new StreamWriter(stream) { AutoFlush = true };
 		string lineToSend = Console.ReadLine();
-		writer.WriteLine(lineToSend);
+		if (lineToSend.Split(' ')[0] == "Файл")
+                {
+		    var name = lineToSend.Split(' ')[1];
+                    var file = File.ReadAllBytes(name);
+                    string b64 = Convert.ToBase64String(file);
+                    writer.WriteLine($"Файл {name} {b64}");
+                }
+                else
+		    writer.WriteLine(lineToSend);
 		string all = "";
 		string line;
 		while ((line = reader.ReadLine()) != null)
