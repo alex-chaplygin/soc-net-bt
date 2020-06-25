@@ -265,23 +265,30 @@ namespace СоцСеть {
 
 	static void Загрузить()
         {
-	    StreamReader srКомментарии = new StreamReader("комментарии.txt");
-            StreamReader srПользователи = new StreamReader("пользователи.txt");
-            StreamReader srСообщения = new StreamReader("сообщения.txt");
-            StreamReader srСтены = new StreamReader("стены.txt");
-            string line;
-            while ((line = srПользователи.ReadLine()) != null)
-                соцСеть.Регистрация(line.Split(':')[0], line.Split(':')[1]);
-            srПользователи.Close();
-            while ((line = srСообщения.ReadLine()) != null)
-                Сообщение(line.Split(':')[0], line.Split(':')[1], line.Split(':')[2]);
-            srСообщения.Close();
-            while ((line = srСтены.ReadLine()) != null)
-                соцСеть.НайтиПользователя(line.Split(':')[0]).Опубликовать(line.Split(':')[1]);
-            srСтены.Close();
-            while ((line = srКомментарии.ReadLine()) != null)
-                соцСеть.НайтиПользователя(line.Split(':')[0]).ПолучитьСтену().ПолучитьПубликации()[Convert.ToInt32(line.Split(':')[1])].ДобавитьКомментарий(line.Split(':')[2]);
-            srКомментарии.Close();
+	    try
+            {
+		StreamReader srКомментарии = new StreamReader("комментарии.txt");
+		StreamReader srПользователи = new StreamReader("пользователи.txt");
+		StreamReader srСообщения = new StreamReader("сообщения.txt");
+		StreamReader srСтены = new StreamReader("стены.txt");
+		string line;
+		while ((line = srПользователи.ReadLine()) != null)
+		    соцСеть.Регистрация(line.Split(':')[0], line.Split(':')[1]);
+		srПользователи.Close();
+		while ((line = srСообщения.ReadLine()) != null)
+		    Сообщение(line.Split(':')[0], line.Split(':')[1], line.Split(':')[2]);
+		srСообщения.Close();
+		while ((line = srСтены.ReadLine()) != null)
+		    соцСеть.НайтиПользователя(line.Split(':')[0]).Опубликовать(line.Split(':')[1]);
+		srСтены.Close();
+		while ((line = srКомментарии.ReadLine()) != null)
+		    соцСеть.НайтиПользователя(line.Split(':')[0]).ПолучитьСтену().ПолучитьПубликации()[Convert.ToInt32(line.Split(':')[1])].ДобавитьКомментарий(line.Split(':')[2]);
+		srКомментарии.Close();
+	    }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Ошибка: {e.Message}");
+            }
         }
 	
         static void Сохранить()
