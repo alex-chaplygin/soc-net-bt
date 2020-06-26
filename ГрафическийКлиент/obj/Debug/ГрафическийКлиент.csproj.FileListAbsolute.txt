@@ -20,3 +20,14 @@ C:\Users\Konstantin\Downloads\soc-net-bt-master\ГрафическийКлиен
 C:\Users\Konstantin\Downloads\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.csproj.CoreCompileInputs.cache
 C:\Users\Konstantin\Downloads\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.exe
 C:\Users\Konstantin\Downloads\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.pdb
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\bin\Debug\ГрафическийКлиент.exe.config
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\bin\Debug\ГрафическийКлиент.exe
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\bin\Debug\ГрафическийКлиент.pdb
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.csprojAssemblyReference.cache
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.Board.resources
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.Form1.resources
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.Properties.Resources.resources
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.csproj.GenerateResource.cache
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.csproj.CoreCompileInputs.cache
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.exe
+C:\Users\Konstantin\Desktop\soc-net-bt-master\ГрафическийКлиент\obj\Debug\ГрафическийКлиент.pdb

@@ -50,12 +50,11 @@ namespace ГрафическийКлиент
         {
             userList.Items.Clear();
             string userlist;
-            userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} false");
-	    Console.WriteLine($"Онлайн {Form1.номерПользователя} false");
+            userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} 0");
             if (checkBox1.Checked == true)
-                userlist = Program.пользователь.ОтправитьПолучить($"Онлайн {Form1.номерПользователя} false");
+                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} 1");
             else
-                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} true");
+                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} 0");
             foreach (string s in userlist.Split('\n'))
                 if (s != "")
                     userList.Items.Add(s);
@@ -109,6 +108,12 @@ namespace ГрафическийКлиент
         private void userList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Program.пользователь.ОтправитьПолучить("Онлайн" + " " + Form1.номерПользователя + " " + textBoxName.Text));
+            textBoxName.Text = "";
         }
     }
 }
