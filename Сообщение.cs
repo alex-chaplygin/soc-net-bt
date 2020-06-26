@@ -60,10 +60,10 @@ namespace СоцСеть
 
 	public void ДобавитьКомментарий(string text)
         {
-            комментарии.Add(text);
+            комментарии.Add(new Сообщение(пользователь, text));
         }
 	
-        public List<string> ПолучитьКомментарии()
+        public List<Сообщение> ПолучитьКомментарии()
         {
             return комментарии;
         }
