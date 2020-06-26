@@ -51,8 +51,9 @@ namespace ГрафическийКлиент
             userList.Items.Clear();
             string userlist;
             userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} false");
+	    Console.WriteLine($"Онлайн {Form1.номерПользователя} false");
             if (checkBox1.Checked == true)
-                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} false");
+                userlist = Program.пользователь.ОтправитьПолучить($"Онлайн {Form1.номерПользователя} false");
             else
                 userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} true");
             foreach (string s in userlist.Split('\n'))
