@@ -278,24 +278,35 @@ namespace СоцСеть {
         {
 	    try
             {
-		StreamReader srКомментарии = new StreamReader("комментарии.txt");
-		StreamReader srПользователи = new StreamReader("пользователи.txt");
-		StreamReader srСообщения = new StreamReader("сообщения.txt");
-		StreamReader srСтены = new StreamReader("стены.txt");
-		string line;
-		while ((line = srПользователи.ReadLine()) != null)
-		    соцСеть.Регистрация(line.Split(':')[0], line.Split(':')[1]);
-		srПользователи.Close();
-		while ((line = srСообщения.ReadLine()) != null)
-		    Сообщение(line.Split(':')[0], line.Split(':')[1], line.Split(':')[2]);
-		srСообщения.Close();
-		while ((line = srСтены.ReadLine()) != null)
-		    соцСеть.НайтиПользователя(line.Split(':')[0]).Опубликовать(line.Split(':')[1]);
-		srСтены.Close();
-		while ((line = srКомментарии.ReadLine()) != null)
-		    соцСеть.НайтиПользователя(line.Split(':')[0]).ПолучитьСтену().ПолучитьПубликации()[Convert.ToInt32(line.Split(':')[1])].ДобавитьКомментарий(line.Split(':')[2]);
-		srКомментарии.Close();
-	    }
+                StreamReader srКомментарии = new StreamReader("комментарии.txt");
+                StreamReader srПользователи = new StreamReader("пользователи.txt");
+                StreamReader srСообщения = new StreamReader("сообщения.txt");
+                StreamReader srСтены = new StreamReader("стены.txt");
+                StreamReader srГруппы = new StreamReader("группы.txt");
+                List<Группа> группы = соцСеть.ПолучитьГруппы();
+                Группа группа;
+                string line;
+                while ((line = srГруппы.ReadLine()) != null)
+                {
+                    if (!группы.Contains(соцСеть.НайтиГруппу(line.Split(':')[0])))
+                        соцСеть.ДобавитьГруппу(line.Split(':')[0]);
+                    группа = соцСеть.НайтиГруппу(line.Split(':')[0]);
+                    группа.ПолучитьСтену().Опубликовать(new СоцСеть.Сообщение(соцСеть.НайтиПользователя(line.Split(':')[1]), line.Split(':')[2]));
+                }
+                srГруппы.Close();
+                while ((line = srПользователи.ReadLine()) != null)
+                    соцСеть.Регистрация(line.Split(':')[0], line.Split(':')[1]);
+                srПользователи.Close();
+                while ((line = srСообщения.ReadLine()) != null)
+                    Сообщение(line.Split(':')[0], line.Split(':')[1], line.Split(':')[2]);
+                srСообщения.Close();
+                while ((line = srСтены.ReadLine()) != null)
+                    соцСеть.НайтиПользователя(line.Split(':')[0]).Опубликовать(line.Split(':')[1]);
+                srСтены.Close();
+                while ((line = srКомментарии.ReadLine()) != null)
+                    соцСеть.НайтиПользователя(line.Split(':')[0]).ПолучитьСтену().ПолучитьПубликации()[Convert.ToInt32(line.Split(':')[1])].ДобавитьКомментарий(line.Split(':')[2]);
+                srКомментарии.Close();
+            }
             catch (Exception e)
             {
                 Console.WriteLine($"Ошибка: {e.Message}");
@@ -308,9 +319,17 @@ namespace СоцСеть {
             StreamWriter swПользователи = new StreamWriter("пользователи.txt");
             StreamWriter swСообщения = new StreamWriter("сообщения.txt");
             StreamWriter swСтены = new StreamWriter("стены.txt");
+            StreamWriter swГруппы = new StreamWriter("группы.txt");
             List<Пользователь> пользователи = соцСеть.ВернутьПользователей();
             List<Чат> чаты = соцСеть.ПолучитьЧаты();
             List<Сообщение> сообщения;
+            foreach (Группа г in соцСеть.ПолучитьГруппы()) {
+		Console.WriteLine(г.ПолучитьНазвание());
+		Console.WriteLine(г.ПолучитьСтену().ПолучитьПубликации());
+                foreach (Сообщение с in г.ПолучитьСтену().ПолучитьПубликации())
+                    swГруппы.WriteLine($"{г.ПолучитьНазвание()}:{с.ПолучитьПользователя().ПолучитьИмя()}:{с.ПолучитьТекст()}");
+	    }
+	    swГруппы.Close();
             foreach (Пользователь п in пользователи)
                 swПользователи.WriteLine($"{п.ПолучитьИмя()}:{п.ПолучитьПароль()}");
             swПользователи.Close();
@@ -330,14 +349,14 @@ namespace СоцСеть {
                     swСтены.WriteLine($"{п.ПолучитьИмя()}:{с.ПолучитьТекст()}");
             }
             swСтены.Close();
-	    foreach (Пользователь п in пользователи)
+            foreach (Пользователь п in пользователи)
             {
                 сообщения = п.ПолучитьСтену().ПолучитьПубликации();
                 for (int j = 0; j < сообщения.Count; j++)
                     for (int i = 0; i < сообщения[j].ПолучитьКомментарии().Count; i++)
                         swКомментарии.WriteLine($"{п.ПолучитьИмя()}:{j}:{сообщения[j].ПолучитьКомментарии()[i]}");
             }
-	    swКомментарии.Close();
+            swКомментарии.Close();
 	}
 
 	static string ПрикрепитьИзображение(int номер, string path)
