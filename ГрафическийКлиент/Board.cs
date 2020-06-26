@@ -104,5 +104,10 @@ namespace ГрафическийКлиент
             foreach (string t in text)
                 textBoxMsgs.Text += t + Environment.NewLine;
         }
+
+        private void userList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

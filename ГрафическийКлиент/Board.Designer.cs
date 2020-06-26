@@ -98,6 +98,7 @@
             this.userList.Name = "userList";
             this.userList.Size = new System.Drawing.Size(163, 238);
             this.userList.TabIndex = 5;
+            this.userList.SelectedIndexChanged += new System.EventHandler(this.userList_SelectedIndexChanged);
             // 
             // checkBox1
             // 

@@ -36,11 +36,13 @@ namespace ГрафическийКлиент
                 MessageBox.Show(returned);
             if (returned != "Неверное имя пользователя или пароль" && returned != "Ошибка подключения")
             {
+                код = returned;
                 номерПользователя = Convert.ToInt32(returned);
                 имяПользователя = textBox2.Text;
                 Board.board.Show();
                 button3.Visible = true;
             }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -48,7 +50,7 @@ namespace ГрафическийКлиент
             string mess = $"Выход {номерПользователя}";
             MessageBox.Show(п.ОтправитьПолучить(mess));
         }
-
+        static string код;
         private void button4_Click(object sender, EventArgs e)
         {
             try
@@ -61,6 +63,16 @@ namespace ГрафическийКлиент
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(п.ОтправитьПолучить("СписокПользователей" + " " + код));
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(п.ОтправитьПолучить("Онлайн" + " " + код));
         }
     }
 }
