@@ -11,14 +11,14 @@ namespace СоцСеть
         private Пользователь пользователь;
         private string текст;
         private List<Image> изображения;
-	private List<string> комментарии;
+	private List<Сообщение> комментарии;
 
         public Сообщение(Пользователь п)
         {
             пользователь = п;
             текст = "";
 	    изображения = new List<Image>();
-	    комментарии = new List<string>();
+	    комментарии = new List<Сообщение>();
         }
 	
         public Сообщение(Пользователь п, string с)
