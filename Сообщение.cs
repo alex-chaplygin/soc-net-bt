@@ -26,7 +26,7 @@ namespace СоцСеть
 	public Сообщение(Пользователь п, string с, string time = "")
         {
             пользователь = п;
-            текст = "";
+            текст = с;
             изображения = new List<Image>();
             комментарии = new List<string>();
             if (time == "")
