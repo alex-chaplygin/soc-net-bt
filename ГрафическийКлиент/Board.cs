@@ -50,14 +50,22 @@ namespace ГрафическийКлиент
         {
             userList.Items.Clear();
             string userlist;
-            userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} false");
+            userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} 0");
             if (checkBox1.Checked == true)
-                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} false");
+            {
+                string[] mass = userlist.Split('\n');
+                for(int i = 0; i<mass.Length;i++)
+                if(Program.пользователь.ОтправитьПолучить($"Онлайн {Form1.номерПользователя} {mass[i]}") == "да")
+                {
+                        userList.Items.Add(mass[i]);
+                }
+            }
             else
-                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} true");
+            { userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} 0");
             foreach (string s in userlist.Split('\n'))
                 if (s != "")
-                    userList.Items.Add(s);
+                    userList.Items.Add(s); }
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -103,6 +111,17 @@ namespace ГрафическийКлиент
             string[] text = Program.пользователь.ОтправитьПолучить($"Список {Form1.номерПользователя} {Convert.ToString(userList.SelectedItem)} 0").Split('~');
             foreach (string t in text)
                 textBoxMsgs.Text += t + Environment.NewLine;
+        }
+
+        private void userList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Program.пользователь.ОтправитьПолучить("Онлайн" + " " + Form1.номерПользователя + " " + textBoxName.Text));
+            textBoxName.Text = "";
         }
     }
 }
