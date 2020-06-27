@@ -52,12 +52,20 @@ namespace ГрафическийКлиент
             string userlist;
             userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} 0");
             if (checkBox1.Checked == true)
-                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} 1");
+            {
+                string[] mass = userlist.Split('\n');
+                for(int i = 0; i<mass.Length;i++)
+                if(Program.пользователь.ОтправитьПолучить($"Онлайн {Form1.номерПользователя} {mass[i]}") == "да")
+                {
+                        userList.Items.Add(mass[i]);
+                }
+            }
             else
-                userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} 0");
+            { userlist = Program.пользователь.ОтправитьПолучить($"СписокПользователей {Form1.номерПользователя} 0");
             foreach (string s in userlist.Split('\n'))
                 if (s != "")
-                    userList.Items.Add(s);
+                    userList.Items.Add(s); }
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
