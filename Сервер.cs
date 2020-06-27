@@ -292,6 +292,7 @@ namespace СоцСеть {
 		StreamReader srПользователи = new StreamReader("пользователи.txt");
 		StreamReader srСообщения = new StreamReader("сообщения.txt");
 		StreamReader srСтены = new StreamReader("стены.txt");
+		StreamReader srДрузья = new StreamReader("друзья.txt");
 		string line;
 		while ((line = srПользователи.ReadLine()) != null)
 		    соцСеть.Регистрация(line.Split(':')[0], line.Split(':')[1]);
@@ -305,6 +306,9 @@ namespace СоцСеть {
 		while ((line = srКомментарии.ReadLine()) != null)
 		    соцСеть.НайтиПользователя(line.Split(':')[0]).ПолучитьСтену().ПолучитьПубликации()[Convert.ToInt32(line.Split(':')[1])].ДобавитьКомментарий(line.Split(':')[2]);
 		srКомментарии.Close();
+		while ((line = srДрузья.ReadLine()) != null)
+                    соцСеть.НайтиПользователя(line.Split(':')[0]).ДобавитьДруга(соцСеть.НайтиПользователя(line.Split(':')[1]));
+                srДрузья.Close();
 	    }
             catch (Exception e)
             {
@@ -318,9 +322,11 @@ namespace СоцСеть {
             StreamWriter swПользователи = new StreamWriter("пользователи.txt");
             StreamWriter swСообщения = new StreamWriter("сообщения.txt");
             StreamWriter swСтены = new StreamWriter("стены.txt");
+	    StreamWriter swДрузья = new StreamWriter("друзья.txt");
             List<Пользователь> пользователи = соцСеть.ВернутьПользователей();
             List<Чат> чаты = соцСеть.ПолучитьЧаты();
             List<Сообщение> сообщения;
+	    List<Пользователь> списокДрузей;
             foreach (Пользователь п in пользователи)
                 swПользователи.WriteLine($"{п.ПолучитьИмя()}:{п.ПолучитьПароль()}");
             swПользователи.Close();
@@ -348,6 +354,14 @@ namespace СоцСеть {
                         swКомментарии.WriteLine($"{п.ПолучитьИмя()}:{j}:{сообщения[j].ПолучитьКомментарии()[i]}");
             }
 	    swКомментарии.Close();
+	    foreach (Пользователь п in пользователи)
+            {
+                списокДрузей = п.СписокДрузей();
+                if (списокДрузей.Count > 0)
+                    foreach (Пользователь друг in списокДрузей)
+                        swДрузья.WriteLine($"{п.ПолучитьИмя()}:{друг.ПолучитьИмя()}");
+            }
+            swДрузья.Close();
 	}
 
 	static string ПрикрепитьИзображение(int номер, string path)
