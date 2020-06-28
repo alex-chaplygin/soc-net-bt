@@ -37,9 +37,7 @@ namespace СоцСеть
 
 	public string ПолучитьВремя()
         {
-	    string time = время.ToString();
-            time = time.Replace(':', ',');
-            return time;
+	    return время.ToString();
         }
 	
         public Пользователь ПолучитьПользователя()
