@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 namespace СоцСеть {
     class СоциальнаяСеть {
@@ -99,7 +100,7 @@ namespace СоцСеть {
 	
         public void ПодписатьсяНаГруппу(Пользователь п, string name)
         {
-            if (НайтиГруппу(name) != null)
+            if (НайтиГруппу(name) == null)
                 return;
             НайтиГруппу(name).Подписаться(п);
         }
